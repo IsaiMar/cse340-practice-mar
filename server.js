@@ -19,11 +19,11 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/home.html"))
 })
 
-app.get("/page1", (req, res) => {
+app.get("/contacts", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/page1.html"))
 })
 
-app.get("/page2", (req, res) => {
+app.get("/about-us", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/page2.html"))
 })
 
