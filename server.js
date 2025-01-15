@@ -11,7 +11,6 @@ const __dirname = path.dirname(__filename)
 
 // Create an instance of an Express application
 const app = express()
-const name = process.env.NAME // <-- NEW
 
 app.use(express.static(path.join(__dirname, "public")))
 
