@@ -1,21 +1,13 @@
 {
-  "name": "cse340-practice-mar",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "dev": "nodemon --env-file=.env server.js",
-    "start": "node --env-file=.env server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "ejs": "^3.1.10",
-    "express": "^4.21.2"
-  },
   "devDependencies": {
-    "nodemon": "^3.1.9",
-    "ws": "^8.18.0"
+    "nodemon": "^3.1.9"
+  },
+  "scripts": {
+    "dev": "nodemon --env-file=.env server.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "express": "^5.0.1",
+    "ejs": "^3.1.10"
   }
 }
