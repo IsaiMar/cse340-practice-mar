@@ -1,3 +1,92 @@
 html, body {
     background-color: rgb(67, 156, 186);
+    font-family: Arial, sans-serif;
+}
+
+main{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+}
+
+.about {
+    margin: 50px auto;
+    max-width: 600px;
+    background: rgb(194, 194, 194);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the H1 */
+.about h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Profile Image */
+.about img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #04AA6D;
+}
+
+/* Bio Text */
+.about p {
+    font-size: 18px;
+    color: #282727;
+    line-height: 1.6;
+}
+
+/* General styling for the nav */
+nav {
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+/* Logo styling */
+.logo img {
+    height: 50px; /* Adjust size as needed */
+}
+
+/* Remove default list styles */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    padding-right: 500px;
+}
+
+/* Style the list items */
+nav ul li {
+    margin: 0 15px;
+    padding-right: 200px;
+}
+
+/* Style the links */
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 8px 15px;
+    transition: background 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Hover effect */
+nav ul li a:hover {
+    background-color: #555;
+}
+
+/* Active page effect */
+nav ul li a.active {
+    background-color: #04AA6D;
 }

@@ -2,58 +2,50 @@ import { renderFile } from 'ejs';
 import path from 'path';
  
 /**
-* Middleware to automatically wrap EJS views in a layout.
-* This replicates `express-ejs-layouts` behavior in pure EJS.
-* 
-* @param {object} options - Configuration options
-* @param {string} options.layoutDir - The directory containing layout files
-* @param {string} [options.defaultLayout='default'] - The default layout filename (without .ejs)
-* @returns {Function} Express middleware function
-*/
-const layoutMiddleware = ({ layoutDir, defaultLayout = 'default' }) => {
-    // Remove .ejs extension from the default layout filename if present
-    defaultLayout = defaultLayout.replace(/\.ejs$/, '');
+ * Middleware to automatically wrap EJS views in a layout.
+ * This replicates `express-ejs-layouts` behavior in pure EJS.
+ */
+const layouts = (req, res, next) => {
+    // Retrieve configuration from Express settings
+    const layoutDir = req.app.get('layouts') || path.join(process.cwd(), 'views/layouts');
+    const defaultLayout = req.app.get('layout default')?.replace(/\.ejs$/, '') || 'default';
  
-    return (req, res, next) => {
-        // Save the original res.render method for later use
-        const originalRender = res.render;
+    // Save the original res.render method for later use
+    const originalRender = res.render;
  
-        /**
-        * Override `res.render()` to apply layouts automatically.
-        * This allows calling `res.render('home')` without specifying the layout.
-        */
-        res.render = function (view, options = {}, callback) {
-            // If layout is explicitly set to `false`, render the view normally without a layout
-            if (options.layout === false) {
-                originalRender.call(res, view, options, callback);
-                return;
+    // Override `res.render()` to apply layouts automatically.
+    res.render = (view, options = {}, callback) => {
+        // If layout is explicitly set to `false`, render the view normally without a layout
+        if (options.layout === false) {
+            return originalRender.call(res, view, options, callback);
+        }
+ 
+        // Resolve the full path of the requested view
+        const viewsDir = res.app.get('views');
+        const viewPath = view.startsWith(viewsDir) ? view : path.join(viewsDir, `${view}.ejs`);
+ 
+        // First, render the requested view to get its content
+        renderFile(viewPath, options, (err, body) => {
+            if (err) {
+                return next(err);
             }
  
-            // Resolve the full path of the requested view
-            const viewPath = path.join(res.app.get('views'), `${view}.ejs`);
+            // Store the rendered content in `options.body`, so the layout can use it
+            options.body = body || '';
  
-            // First, render the requested view to get its content
-            renderFile(viewPath, options, (err, body) => {
-                if (err) {
-                    next(err); // Pass any rendering errors to Express error handler
-                    return;
-                }
+            // Determine which layout to use (default layout or a custom one if specified)
+            const layoutFile = `${options.layout || defaultLayout}.ejs`;
+            const layoutPath = path.join(layoutDir, layoutFile);
  
-                // Store the rendered content in `options.body`, so the layout can use it
-                options.body = body || '';
- 
-                // Determine which layout to use (default layout or a custom one if specified)
-                const layoutFile = `${options.layout || defaultLayout}.ejs`;
-                const layoutPath = path.join(layoutDir, layoutFile);
- 
-                // Render the selected layout, passing the rendered view content
-                originalRender.call(res, layoutPath, options, callback);
-            });
-        };
- 
-        // Proceed to the next middleware in the stack
-        next();
+            // Render the selected layout, passing the rendered view content
+            originalRender.call(res, layoutPath, options, callback);
+        });
     };
+ 
+    // Protect from a layout loop by ensuring `next()` is called only once
+    if (!res.headersSent) {
+        next();
+    }
 };
  
-export default layoutMiddleware;
+export default layouts;
