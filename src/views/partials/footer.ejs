@@ -1,1 +1,7 @@
 <p>&copy; 2025 My App</p>
+
+<% if (locals.isDevMode) { %>
+    <p style="color: red; font-weight: bold; text-align: center; padding: 10px;">
+        <%= devModeMsg %>
+    </p>
+<% } %>

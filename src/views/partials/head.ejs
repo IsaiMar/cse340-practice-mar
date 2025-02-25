@@ -2,3 +2,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%= title %></title>
 <link rel="stylesheet" href="/css/main.css">
+
+<!-- Dynamically injected styles -->
+<% if (locals.styles) { %>
+    <% styles.forEach(style => { %>
+        <link rel="stylesheet" href="<%= style %>">
+    <% }); %>
+<% } %>
+
+<!-- Dynamically injected scripts (like Live Reload) -->
+<% if (locals.scripts) { %>
+    <% scripts.forEach(script => { %>
+        <%= script %>
+    <% }); %>
+<% } %>
