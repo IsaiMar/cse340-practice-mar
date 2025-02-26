@@ -90,3 +90,75 @@ nav ul li a:hover {
 nav ul li a.active {
     background-color: #04AA6D;
 }
+
+/* Form styling */
+form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Label styling */
+label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #333;
+}
+
+/* Input and textarea styling */
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Textarea specific height */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Input/textarea focus styling */
+input:focus, textarea:focus {
+    border-color: #5e9ad6;
+    outline: none;
+}
+
+/* Submit button styling */
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #5e9ad6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #4a8bc2;
+}
+
+/* Optional: Add a slight margin below form for spacing */
+form {
+    margin-bottom: 2rem;
+} 

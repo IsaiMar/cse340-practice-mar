@@ -6,13 +6,13 @@
 <!-- Dynamically injected styles -->
 <% if (locals.styles) { %>
     <% styles.forEach(style => { %>
-        <link rel="stylesheet" href="<%= style %>">
+        <%- style %>
     <% }); %>
 <% } %>
 
 <!-- Dynamically injected scripts (like Live Reload) -->
 <% if (locals.scripts) { %>
     <% scripts.forEach(script => { %>
-        <%= script %>
+        <%- script %>
     <% }); %>
 <% } %>

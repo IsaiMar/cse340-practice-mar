@@ -9,6 +9,8 @@ import layouts from './src/middleware/layouts.js';
 import configureStaticPaths from './src/middleware/static-paths.js';
 import { notFoundHandler, globalErrorHandler } from './src/middleware/error-handler.js';
 import configMode from "./src/middleware/config-mode.js";
+import fileUploads from './src/middleware/file-upload.js';
+import contactRouter from "./src/routes/contact/index.js";
  
 // Get the current file path and directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -30,10 +32,13 @@ app.set('layout default', 'default');
 app.set('layouts', path.join(__dirname, 'src/views/layouts'));
 app.use(layouts);
 app.use(configMode);
+app.use(fileUploads);
 
  
 // Use the home route for the root URL
 app.use('/', baseRoute);
+
+app.use("/contact", contactRouter);
  
 // Apply error handlers
 app.use(notFoundHandler);
