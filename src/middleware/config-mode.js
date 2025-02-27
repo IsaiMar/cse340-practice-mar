@@ -1,6 +1,6 @@
-// src/middleware/config-mode.js
+const mode = process.env.MODE || "production";
+const isDevMode = mode !== "production";
 
-const isDevMode = process.env.NODE_ENV !== "production";
 const configMode = (req, res, next) => {
     res.locals.scripts = []; // Initialize an empty array for scripts
     res.locals.styles = [];  // Initialize an empty array for styles
@@ -24,6 +24,7 @@ const configMode = (req, res, next) => {
     // If in development mode, add live reload script
     if (isDevMode) {
         const port = process.env.PORT || 3000; // Ensure the port is correctly set
+        // res.addScript(`/reload.js?port=${parseInt(port) + 1}`); 
         res.locals.scripts.push(`
             <script>
                 const ws = new WebSocket('ws://127.0.0.1:${parseInt(port) + 1}');

@@ -18,7 +18,6 @@ const __dirname = path.dirname(__filename);
  
 // Create an instance of an Express application
 const app = express();
-// const configMode = require("./src/middleware/config-mode");
 
 // Configure static paths for the Express application
 configureStaticPaths(app);
@@ -67,6 +66,7 @@ if (mode.includes('dev')) {
         console.error('Failed to start WebSocket server:', error);
     }
 }
+
 app.listen(PORT, () => {
     console.log(`Server running on http://127.0.0.1:${PORT}`);
 });

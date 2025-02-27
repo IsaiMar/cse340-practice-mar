@@ -1,6 +1,8 @@
 html, body {
-    background-color: rgb(67, 156, 186);
+    background-color: rgb(61, 152, 183);
     font-family: Arial, sans-serif;
+    padding: 0%;
+    margin: 0%;
 }
 
 main{
@@ -8,6 +10,7 @@ main{
     justify-content: left;
     align-items: center;
     flex-direction: column;
+    padding-top: 80px;
 }
 
 .about {
@@ -162,3 +165,14 @@ button:hover {
 form {
     margin-bottom: 2rem;
 } 
+
+footer {
+    background-color: #222; /* Dark background */
+    color: #fff; /* White text */
+    text-align: center; /* Center text */
+    padding: 15px 0; /* Add some spacing */
+    font-size: 14px;
+    position: fixed; /* Stick to bottom */
+    bottom: 0;
+    width: 100%;
+}
